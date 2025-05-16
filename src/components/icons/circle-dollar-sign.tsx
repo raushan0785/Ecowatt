@@ -49,12 +49,26 @@ const CircleDollarSignIcon = () => {
   const controls = useAnimation();
 
   useEffect(() => {
-    const interval = setInterval(async () => {
+    // Animate after initial mount
+    let isMounted = true;
+
+    const startAnimation = async () => {
+      if (!isMounted) return;
       await controls.start("animate");
       await controls.start("normal");
+    };
+
+    // Initial call
+    startAnimation();
+
+    const interval = setInterval(() => {
+      startAnimation();
     }, 2000);
 
-    return () => clearInterval(interval);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, [controls]);
 
   return (
@@ -89,3 +103,4 @@ const CircleDollarSignIcon = () => {
 };
 
 export { CircleDollarSignIcon };
+
