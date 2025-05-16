@@ -230,7 +230,7 @@ export default function Onboarding() {
       <TooltipProvider>
         <Card className="w-full max-w-2xl">
           <CardHeader>
-            <CardTitle>Welcome to PrabhaWatt</CardTitle>
+            <CardTitle>Welcome to Ecowatt</CardTitle>
             <CardDescription>
               {"Let's set up your energy profile"}
             </CardDescription>
