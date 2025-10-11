@@ -100,42 +100,39 @@ const PDFGenerator = ({ user, userData }: PDFGeneratorProps) => {
 
   return (
     <PDFDownloadLink
-      document={<PDFReport user={user} userData={userData} detailedReport={detailedReport} />}
-      fileName={`energy-report-${new Date().toISOString().split("T")[0]}.pdf`}
-      onClick={handleDownload}
-      onError={handleDownloadError}
-    >
-      {({ loading, error, blob, url }) => {
-        if (error) {
-          handleDownloadError(error);
-          return (
-            <Button className="bg-red-600 text-white hover:bg-red-700" disabled>
-              <div className="flex items-center">
-                <AlertCircle className="mr-2 h-4 w-4" />
-                Error generating PDF
-              </div>
-            </Button>
-          );
-        }
+  document={<PDFReport user={user} userData={userData} detailedReport={detailedReport} />}
+  fileName={`energy-report-${new Date().toISOString().split("T")[0]}.pdf`}
+  onClick={handleDownload}
+  onError={handleDownloadError}
+>
+  {({ loading, error }) => {
+    if (error) {
+      handleDownloadError(error);
+      return (
+        <Button className="bg-red-600 text-white hover:bg-red-700" disabled>
+          <div className="flex items-center">
+            <AlertCircle className="mr-2 h-4 w-4" />
+            Error generating PDF
+          </div>
+        </Button>
+      );
+    }
 
-        if (blob && url) {
-          handleDownloadComplete();
-        }
+    return (
+      <Button className="bg-green-600 text-white hover:bg-green-700" disabled={loading || isDownloading}>
+        <div className="flex items-center">
+          {loading || isDownloading ? (
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+          ) : (
+            <Download className="mr-2 h-4 w-4" />
+          )}
+          {loading || isDownloading ? "Preparing PDF..." : "Download PDF"}
+        </div>
+      </Button>
+    );
+  }}
+</PDFDownloadLink>
 
-        return (
-          <Button className="bg-green-600 text-white hover:bg-green-700" disabled={loading || isDownloading}>
-            <div className="flex items-center">
-              {loading || isDownloading ? (
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-              ) : (
-                <Download className="mr-2 h-4 w-4" />
-              )}
-              {loading || isDownloading ? "Preparing PDF..." : "Download PDF"}
-            </div>
-          </Button>
-        );
-      }}
-    </PDFDownloadLink>
   );
 };
 
