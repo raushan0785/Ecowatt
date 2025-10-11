@@ -3,53 +3,12 @@ import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  ConsumptionAnalytics,
-  ExecutiveSummary,
-  SmartDevicesAnalysis,
-  SolarAnalysis,
-  TariffAnalysis,
-} from "@/types/user";
-import {
-  AlertCircle,
-  AlertTriangle,
-  Battery,
-  BatteryLow,
-  BatteryWarning,
-  BellRing,
-  CheckCircle,
-  Clock,
-  CloudRain,
-  NotepadText,
-  PlugZap,
-  Settings,
-  Smartphone,
-  Sun,
-  Timer,
-  TrendingDown,
-  TrendingUp,
-  Zap,
-} from "lucide-react";
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import {
-  Tooltip as Tooltip2,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { ExecutiveSummary, ConsumptionAnalytics, SmartDevicesAnalysis, SolarAnalysis, TariffAnalysis } from "@/types/user";
+import { TrendingUp, TrendingDown, Zap, Sun, Battery, Smartphone } from "lucide-react";
 
 // ---------------- Executive Summary ----------------
 const ExecutiveSummaryCard = ({ data }: { data: ExecutiveSummary }) => (
@@ -76,14 +35,12 @@ const ExecutiveSummaryCard = ({ data }: { data: ExecutiveSummary }) => (
           <p className="text-2xl font-bold">
             ₹{data.currentMonthCost.toLocaleString()}
           </p>
-          <p
-            className={`text-sm mt-2 ${data.costTrend === "up" ? "text-red-500" : "text-green-500"}`}
-          >
+          <p className={`text-sm mt-2 ${data.costTrend === "up" ? "text-red-500" : "text-green-500"}`}>
             {Math.abs(data.costComparisonPercentage)}% vs last month
           </p>
         </div>
 
-        {data.solarGeneration !== null && (
+        {data.solarGeneration != null && (
           <div className="p-4 rounded-lg bg-muted">
             <div className="flex items-center justify-between mb-2">
               <span className="text-muted-foreground">Solar Generation</span>
@@ -96,7 +53,7 @@ const ExecutiveSummaryCard = ({ data }: { data: ExecutiveSummary }) => (
           </div>
         )}
 
-        {data.batteryUsage !== null && (
+        {data.batteryUsage != null && (
           <div className="p-4 rounded-lg bg-muted">
             <div className="flex items-center justify-between mb-2">
               <span className="text-muted-foreground">Battery Usage</span>
@@ -144,15 +101,10 @@ const ConsumptionAnalyticsCard = ({ data }: { data: ConsumptionAnalytics }) => (
   <Card className="w-full mb-6">
     <CardHeader>
       <CardTitle className="text-xl font-bold">Consumption Analytics</CardTitle>
-      <CardDescription>
-        Overview of energy consumption patterns.
-      </CardDescription>
     </CardHeader>
     <CardContent>
       <p>Total Consumption: {data.totalConsumption} kWh</p>
       <p>Daily Average: {data.averageDailyConsumption} kWh</p>
-      <p>Peak Consumption: {data.peakConsumptionValue} kW at {new Date(data.peakConsumptionTime).toLocaleTimeString()}</p>
-      {/* Add more charts and insights here */}
     </CardContent>
   </Card>
 );
@@ -167,7 +119,6 @@ const SolarAnalysisCard = ({ data }: { data: SolarAnalysis }) => (
       <p>Daily Generation: {data.dailyGeneration} kWh</p>
       <p>Monthly Generation: {data.monthlyGeneration} kWh</p>
       <p>System Efficiency: {data.efficiency}%</p>
-      <p>Monthly Savings: ₹{data.savingsFromSolar}</p>
     </CardContent>
   </Card>
 );
@@ -183,12 +134,6 @@ const SmartDevicesAnalysisCard = ({ data }: { data: SmartDevicesAnalysis }) => (
     </CardHeader>
     <CardContent>
       <p>Total Potential Savings: ₹{data.totalPotentialSavings}</p>
-      <p>Device Schedules:</p>
-      <ul>
-        {data.deviceSchedules.map((d, i) => (
-          <li key={i}>{d.deviceName}: {d.recommendedPattern}</li>
-        ))}
-      </ul>
     </CardContent>
   </Card>
 );
@@ -198,13 +143,9 @@ const TariffAnalysisCard = ({ data }: { data: TariffAnalysis }) => (
   <Card className="w-full mb-6">
     <CardHeader>
       <CardTitle className="text-xl font-bold">Tariff Analysis</CardTitle>
-      <CardDescription>{data.patternAnalysis}</CardDescription>
     </CardHeader>
     <CardContent>
       <p>Current Rate: ₹{data.currentRate}/kWh</p>
-      <p>Average Rate: ₹{data.averageRate}/kWh</p>
-      <p>Peak Rate: ₹{data.peakRate}/kWh</p>
-      <p>Off-Peak Rate: ₹{data.offPeakRate}/kWh</p>
     </CardContent>
   </Card>
 );
