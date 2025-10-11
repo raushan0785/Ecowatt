@@ -51,6 +51,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 
+// ---------------- Executive Summary ----------------
 const ExecutiveSummaryCard = ({ data }: { data: ExecutiveSummary }) => (
   <Card className="w-full mb-6">
     <CardHeader>
@@ -138,9 +139,77 @@ const ExecutiveSummaryCard = ({ data }: { data: ExecutiveSummary }) => (
   </Card>
 );
 
-// Other cards remain the same, just ensure optional chaining where needed
-// ConsumptionAnalyticsCard, SolarAnalysisCard, SmartDevicesAnalysisCard, TariffAnalysisCard
+// ---------------- Consumption Analytics ----------------
+const ConsumptionAnalyticsCard = ({ data }: { data: ConsumptionAnalytics }) => (
+  <Card className="w-full mb-6">
+    <CardHeader>
+      <CardTitle className="text-xl font-bold">Consumption Analytics</CardTitle>
+      <CardDescription>
+        Overview of energy consumption patterns.
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <p>Total Consumption: {data.totalConsumption} kWh</p>
+      <p>Daily Average: {data.averageDailyConsumption} kWh</p>
+      <p>Peak Consumption: {data.peakConsumptionValue} kW at {new Date(data.peakConsumptionTime).toLocaleTimeString()}</p>
+      {/* Add more charts and insights here */}
+    </CardContent>
+  </Card>
+);
 
+// ---------------- Solar Analysis ----------------
+const SolarAnalysisCard = ({ data }: { data: SolarAnalysis }) => (
+  <Card className="w-full mb-6">
+    <CardHeader>
+      <CardTitle className="text-xl font-bold">Solar Analysis</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <p>Daily Generation: {data.dailyGeneration} kWh</p>
+      <p>Monthly Generation: {data.monthlyGeneration} kWh</p>
+      <p>System Efficiency: {data.efficiency}%</p>
+      <p>Monthly Savings: ₹{data.savingsFromSolar}</p>
+    </CardContent>
+  </Card>
+);
+
+// ---------------- Smart Devices Analysis ----------------
+const SmartDevicesAnalysisCard = ({ data }: { data: SmartDevicesAnalysis }) => (
+  <Card className="w-full mb-6">
+    <CardHeader>
+      <CardTitle className="text-xl font-bold flex items-center gap-2">
+        Smart Devices Analysis
+        <Smartphone className="h-5 w-5 text-blue-500" />
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
+      <p>Total Potential Savings: ₹{data.totalPotentialSavings}</p>
+      <p>Device Schedules:</p>
+      <ul>
+        {data.deviceSchedules.map((d, i) => (
+          <li key={i}>{d.deviceName}: {d.recommendedPattern}</li>
+        ))}
+      </ul>
+    </CardContent>
+  </Card>
+);
+
+// ---------------- Tariff Analysis ----------------
+const TariffAnalysisCard = ({ data }: { data: TariffAnalysis }) => (
+  <Card className="w-full mb-6">
+    <CardHeader>
+      <CardTitle className="text-xl font-bold">Tariff Analysis</CardTitle>
+      <CardDescription>{data.patternAnalysis}</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <p>Current Rate: ₹{data.currentRate}/kWh</p>
+      <p>Average Rate: ₹{data.averageRate}/kWh</p>
+      <p>Peak Rate: ₹{data.peakRate}/kWh</p>
+      <p>Off-Peak Rate: ₹{data.offPeakRate}/kWh</p>
+    </CardContent>
+  </Card>
+);
+
+// ---------------- Export All ----------------
 export {
   ConsumptionAnalyticsCard,
   ExecutiveSummaryCard,
