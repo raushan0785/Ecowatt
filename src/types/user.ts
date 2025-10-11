@@ -70,14 +70,22 @@ export interface EnergyData {
 }
 
 export interface ExecutiveSummary {
-  currentMonthCost: number;
-  costComparisonPercentage: number;
-  costTrend?: "up" | "down"; // Optional, "up" or "down"
+  // Fields for ReportCards
+  currentMonthCost?: number;
+  costComparisonPercentage?: number;
+  costTrend?: "up" | "down";
   solarGeneration?: number | null;
   batteryUsage?: number | null;
   totalEnergySavings?: number;
-  keyRecommendations: KeyRecommendation[];
+  keyRecommendations?: KeyRecommendation[];
+
+  // Fields for PDFDownloadButton / old structure
+  monthlyBill?: number;
+  primaryGoal?: string;
+  energyProfile?: EnergyProfile;
+  discom?: string;
 }
+
 export interface TariffAnalysis {
   averagePowerPurchaseCost: number;
   averageCostOfSupply: number;
