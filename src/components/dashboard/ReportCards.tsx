@@ -32,12 +32,20 @@ const ExecutiveSummaryCard = ({ data }: { data: ExecutiveSummary }) => (
             <span className="text-muted-foreground">Current Month's Cost</span>
             <Zap className="h-5 w-5 text-blue-500" />
           </div>
-          <p className="text-2xl font-bold">
-            ₹{data.currentMonthCost.toLocaleString()}
-          </p>
-          <p className={`text-sm mt-2 ${data.costTrend === "up" ? "text-red-500" : "text-green-500"}`}>
-            {Math.abs(data.costComparisonPercentage)}% vs last month
-          </p>
+
+<p className="text-2xl font-bold">
+  ₹{data.currentMonthCost?.toLocaleString() ?? "0"}
+</p>
+<p
+  className={`text-sm mt-2 ${
+    data.costTrend === "up" ? "text-red-500" : "text-green-500"
+  }`}
+>
+  {Math.abs(data.costComparisonPercentage ?? 0)}% vs last month
+</p>
+
+
+          
         </div>
 
         {data.solarGeneration != null && (
