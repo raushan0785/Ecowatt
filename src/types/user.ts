@@ -97,7 +97,10 @@ export interface ConsumptionAnalytics {
   peakDemandTime: string;
   consumptionPattern: string;
   mainConsumers: string[];
+  totalConsumption?: number; // in kWh
+  averageDailyConsumption?: number; // in kWh
 }
+
 
 export interface SolarAnalysis {
   status: string;
