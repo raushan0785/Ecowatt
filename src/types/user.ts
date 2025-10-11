@@ -106,7 +106,11 @@ export interface SolarAnalysis {
   status: string;
   capacity: number;
   potential: string;
+  dailyGeneration?: number;       // in kWh
+  monthlyGeneration?: number;     // in kWh
+  efficiency?: number;            // in percentage
 }
+
 
 export interface SmartDevicesAnalysis {
   installedDevices: Array<{
