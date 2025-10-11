@@ -75,29 +75,28 @@ const ExecutiveSummaryCard = ({ data }: { data: ExecutiveSummary }) => (
       <div className="space-y-4">
         <h3 className="font-semibold">Key Recommendations</h3>
         <div className="grid gap-3">
-          {data.keyRecommendations.map((rec, index) => (
-            <Alert key={index}>
-              <div className="flex items-center gap-2">
-                <Badge
-                  variant={
-                    rec.priority === "high"
-                      ? "destructive"
-                      : rec.priority === "medium"
-                        ? "default"
-                        : "secondary"
-                  }
-                >
-                  {rec.priority}
-                </Badge>
-                <AlertDescription className="flex-1">
-                  {rec.text}
-                </AlertDescription>
-              </div>
-              <p className="text-sm text-muted-foreground mt-1">
-                Impact: {rec.estimatedImpact}
-              </p>
-            </Alert>
-          ))}
+         {data.keyRecommendations?.map((rec, index) => (
+  <Alert key={index}>
+    <div className="flex items-center gap-2">
+      <Badge
+        variant={
+          rec.priority === "high"
+            ? "destructive"
+            : rec.priority === "medium"
+            ? "default"
+            : "secondary"
+        }
+      >
+        {rec.priority}
+      </Badge>
+      <AlertDescription className="flex-1">{rec.text}</AlertDescription>
+    </div>
+    <p className="text-sm text-muted-foreground mt-1">
+      Impact: {rec.estimatedImpact}
+    </p>
+  </Alert>
+)) ?? []}
+
         </div>
       </div>
     </CardContent>
