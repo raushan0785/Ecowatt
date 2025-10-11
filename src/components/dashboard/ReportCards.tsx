@@ -110,8 +110,9 @@ const ConsumptionAnalyticsCard = ({ data }: { data: ConsumptionAnalytics }) => (
       <CardTitle className="text-xl font-bold">Consumption Analytics</CardTitle>
     </CardHeader>
     <CardContent>
-      <p>Total Consumption: {data.totalConsumption} kWh</p>
-      <p>Daily Average: {data.averageDailyConsumption} kWh</p>
+      <p>Total Consumption: {data.totalConsumption ?? 0} kWh</p>
+<p>Daily Average: {data.averageDailyConsumption ?? 0} kWh</p>
+
     </CardContent>
   </Card>
 );
