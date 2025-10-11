@@ -124,9 +124,10 @@ const SolarAnalysisCard = ({ data }: { data: SolarAnalysis }) => (
       <CardTitle className="text-xl font-bold">Solar Analysis</CardTitle>
     </CardHeader>
     <CardContent>
-      <p>Daily Generation: {data.dailyGeneration} kWh</p>
-      <p>Monthly Generation: {data.monthlyGeneration} kWh</p>
-      <p>System Efficiency: {data.efficiency}%</p>
+     <p>Daily Generation: {data.dailyGeneration ?? 0} kWh</p>
+<p>Monthly Generation: {data.monthlyGeneration ?? 0} kWh</p>
+<p>System Efficiency: {data.efficiency ?? 0}%</p>
+
     </CardContent>
   </Card>
 );
