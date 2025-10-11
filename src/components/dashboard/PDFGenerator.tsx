@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from "@/components/ui/button";
-import { AlertCircle, Download } from "lucide-react";
+import { Download } from "lucide-react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import PDFReport from "./PDFReport";
 import { User } from "firebase/auth";
@@ -17,7 +17,6 @@ interface PDFGeneratorProps {
 const PDFGenerator = ({ user, userData }: PDFGeneratorProps) => {
   const [isDownloading, setIsDownloading] = useState(false);
 
-  // Construct detailedReport object from userData
   const detailedReport: DetailedReport = {
     executiveSummary: {
       monthlyBill: userData.monthlyBill || 0,
@@ -87,39 +86,22 @@ const PDFGenerator = ({ user, userData }: PDFGeneratorProps) => {
     toast.info("Preparing PDF for download...");
   };
 
-  const handleDownloadComplete = () => {
-    setIsDownloading(false);
-    toast.success("PDF downloaded successfully!");
-  };
-
-  const handleDownloadError = (error: any) => {
-    console.error("PDF download error:", error);
-    setIsDownloading(false);
-    toast.error("Failed to download PDF. Please try again.");
-  };
-
   return (
     <PDFDownloadLink
       document={<PDFReport user={user} userData={userData} detailedReport={detailedReport} />}
       fileName={`energy-report-${new Date().toISOString().split("T")[0]}.pdf`}
-      onClick={handleDownload}
-      onError={handleDownloadError}
     >
-      {({ loading }) => (
-        <Button
-          className="bg-green-600 text-white hover:bg-green-700"
-          disabled={loading || isDownloading}
-        >
-          <div className="flex items-center">
-            {loading || isDownloading ? (
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-            ) : (
-              <Download className="mr-2 h-4 w-4" />
-            )}
-            {loading || isDownloading ? "Preparing PDF..." : "Download PDF"}
-          </div>
-        </Button>
-      )}
+      {/* Children must be ReactNode, not a function */}
+      <Button
+        className="bg-green-600 text-white hover:bg-green-700"
+        onClick={handleDownload}
+        disabled={isDownloading}
+      >
+        <div className="flex items-center">
+          <Download className="mr-2 h-4 w-4" />
+          Download PDF
+        </div>
+      </Button>
     </PDFDownloadLink>
   );
 };
