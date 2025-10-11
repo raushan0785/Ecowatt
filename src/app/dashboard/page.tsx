@@ -278,7 +278,7 @@ export default function Dashboard() {
               <DiscomInfoCard discomInfo={discomInfo} touHistory={touHistory} />
               <TOURateHistoryCard
               category={userData?.userCategory ?? undefined}
-                touHistory={touHistory}
+               providedTOUHistory={touHistory}
               />
             </div>
           )}
