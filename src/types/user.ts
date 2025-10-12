@@ -91,13 +91,17 @@ export interface TariffAnalysis {
   averageCostOfSupply: number;
   averageBillingRate: number;
 
-  // ✅ Add these fields for AI and report generation compatibility
   currentRate?: number;
   averageRate?: number;
   peakRate?: number;
   offPeakRate?: number;
   forecastedRates?: number[];
+
+  // ✅ Add these new fields
+  savingsOpportunities?: any[]; // Adjust type if you know exact structure
+  patternAnalysis?: string;
 }
+
 
 
 
