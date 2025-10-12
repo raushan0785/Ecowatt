@@ -118,7 +118,9 @@ export interface SmartDevicesAnalysis {
     type: string;
   }>;
   missingDevices: string[];
+  totalPotentialSavings?: number; // ✅ Add this line
 }
+
 
 export interface Recommendation {
   title: string;
