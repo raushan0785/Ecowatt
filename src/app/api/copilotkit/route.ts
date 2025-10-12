@@ -6,14 +6,16 @@ import {
 import Groq from "groq-sdk";
 import { NextRequest } from "next/server";
 
-const groq = new Groq({ apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY! });
+// ✅ Use a secure environment variable (without NEXT_PUBLIC)
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY! });
 
 const copilotKit = new CopilotRuntime();
 
+// ✅ Use your preferred model
 const serviceAdapter = new GroqAdapter({
   // @ts-ignore
   groq,
-  model: "llama3-8b-8192",
+  model: "mixtral-8x7b",
 });
 
 export const POST = async (req: NextRequest) => {
