@@ -1,4 +1,5 @@
-import { withPWA } from "next-pwa";
+import pkg from "next-pwa";
+const { withPWA } = pkg;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
