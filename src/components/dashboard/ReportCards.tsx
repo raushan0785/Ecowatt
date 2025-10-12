@@ -155,7 +155,8 @@ const TariffAnalysisCard = ({ data }: { data: TariffAnalysis }) => (
       <CardTitle className="text-xl font-bold">Tariff Analysis</CardTitle>
     </CardHeader>
     <CardContent>
-      <p>Current Rate: ₹{data.currentRate}/kWh</p>
+   <p>Current Rate: ₹{data.currentRate ?? 0}/kWh</p>
+
     </CardContent>
   </Card>
 );
