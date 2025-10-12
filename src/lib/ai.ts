@@ -283,16 +283,21 @@ async function generateTariffAnalysis(
 
   try {
     const aiResponse = await fetchAIResponse(aiPrompt, tariffAnalysisSchema);
+return {
+  averagePowerPurchaseCost: parseFloat(discomData["Average power purchase cost (Rs./kWh)"]),
+  averageCostOfSupply: parseFloat(discomData["Average Cost of Supply (Rs./kWh)"]),
+  averageBillingRate: parseFloat(discomData["Average Billing Rate (Rs./kWh)"]),
 
-    return {
-      currentRate: parseFloat(discomData["Average Billing Rate (Rs./kWh)"]),
-      averageRate: parseFloat(averageRate.toFixed(2)),
-      peakRate: parseFloat(peakRate.toFixed(2)),
-      offPeakRate: parseFloat(offPeakRate.toFixed(2)),
-      forecastedRates: aiResponse.forecastedRates,
-      savingsOpportunities: aiResponse?.savingsOpportunities || [],
-      patternAnalysis: aiResponse.patternAnalysis || "",
-    };
+  currentRate: parseFloat(discomData["Average Billing Rate (Rs./kWh)"]),
+  averageRate: parseFloat(averageRate.toFixed(2)),
+  peakRate: parseFloat(peakRate.toFixed(2)),
+  offPeakRate: parseFloat(offPeakRate.toFixed(2)),
+  forecastedRates: aiResponse.forecastedRates,
+  savingsOpportunities: aiResponse?.savingsOpportunities || [],
+  patternAnalysis: aiResponse.patternAnalysis || "",
+};
+
+   
   } catch (error) {
     console.error("Error generating tariff analysis:", error);
     return {
