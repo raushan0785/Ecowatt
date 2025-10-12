@@ -1,6 +1,3 @@
-import pkg from "next-pwa";
-const { withPWA } = pkg;
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -16,6 +13,7 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["@react-pdf/renderer"],
   },
+  // Next-PWA configuration for Next.js 14
   pwa: {
     dest: "public",
     disable: process.env.NODE_ENV === "development",
@@ -24,4 +22,4 @@ const nextConfig = {
   },
 };
 
-export default withPWA(nextConfig);
+export default nextConfig;
