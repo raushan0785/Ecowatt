@@ -90,8 +90,15 @@ export interface TariffAnalysis {
   averagePowerPurchaseCost: number;
   averageCostOfSupply: number;
   averageBillingRate: number;
-  currentRate?: number; // ✅ Add this optional field
+
+  // ✅ Add these fields for AI and report generation compatibility
+  currentRate?: number;
+  averageRate?: number;
+  peakRate?: number;
+  offPeakRate?: number;
+  forecastedRates?: number[];
 }
+
 
 
 export interface ConsumptionAnalytics {
