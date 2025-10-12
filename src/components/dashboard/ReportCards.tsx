@@ -142,7 +142,8 @@ const SmartDevicesAnalysisCard = ({ data }: { data: SmartDevicesAnalysis }) => (
       </CardTitle>
     </CardHeader>
     <CardContent>
-      <p>Total Potential Savings: ₹{data.totalPotentialSavings}</p>
+<p>Total Potential Savings: ₹{data.totalPotentialSavings ?? 0}</p>
+
     </CardContent>
   </Card>
 );
