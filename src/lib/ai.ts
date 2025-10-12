@@ -282,36 +282,44 @@ async function generateTariffAnalysis(
 }`;
 
   try {
-    const aiResponse = await fetchAIResponse(aiPrompt, tariffAnalysisSchema);
-return {
-  averagePowerPurchaseCost: parseFloat(discomData["Average power purchase cost (Rs./kWh)"]),
-  averageCostOfSupply: parseFloat(discomData["Average Cost of Supply (Rs./kWh)"]),
-  averageBillingRate: parseFloat(discomData["Average Billing Rate (Rs./kWh)"]),
+  const aiResponse = await fetchAIResponse(aiPrompt, tariffAnalysisSchema);
 
-  currentRate: parseFloat(discomData["Average Billing Rate (Rs./kWh)"]),
-  averageRate: parseFloat(averageRate.toFixed(2)),
-  peakRate: parseFloat(peakRate.toFixed(2)),
-  offPeakRate: parseFloat(offPeakRate.toFixed(2)),
-  forecastedRates: aiResponse.forecastedRates,
-  savingsOpportunities: aiResponse?.savingsOpportunities || [],
-  patternAnalysis: aiResponse.patternAnalysis || "",
-};
+  return {
+    // Required TariffAnalysis fields
+    averagePowerPurchaseCost: parseFloat(discomData["Average power purchase cost (Rs./kWh)"] || "0"),
+    averageCostOfSupply: parseFloat(discomData["Average Cost of Supply (Rs./kWh)"] || "0"),
+    averageBillingRate: parseFloat(discomData["Average Billing Rate (Rs./kWh)"] || "0"),
 
-   
-  } catch (error) {
-    console.error("Error generating tariff analysis:", error);
-    return {
-      currentRate: parseFloat(discomData["Average Billing Rate (Rs./kWh)"]),
-      averageRate: parseFloat(averageRate.toFixed(2)),
-      peakRate: parseFloat(peakRate.toFixed(2)),
-      offPeakRate: parseFloat(offPeakRate.toFixed(2)),
-      forecastedRates: [],
-      savingsOpportunities: [],
-      patternAnalysis:
-        "There was an error generating the tariff analysis. Please try again.",
-    };
-  }
+    // Additional computed fields
+    currentRate: parseFloat(discomData["Average Billing Rate (Rs./kWh)"] || "0"),
+    averageRate: parseFloat(averageRate.toFixed(2) || "0"),
+    peakRate: parseFloat(peakRate.toFixed(2) || "0"),
+    offPeakRate: parseFloat(offPeakRate.toFixed(2) || "0"),
+    forecastedRates: aiResponse.forecastedRates || [],
+    savingsOpportunities: aiResponse?.savingsOpportunities || [],
+    patternAnalysis: aiResponse.patternAnalysis || "",
+  };
+} catch (error) {
+  console.error("Error generating tariff analysis:", error);
+
+  return {
+    // Include all required TariffAnalysis fields with fallback values
+    averagePowerPurchaseCost: parseFloat(discomData["Average power purchase cost (Rs./kWh)"] || "0"),
+    averageCostOfSupply: parseFloat(discomData["Average Cost of Supply (Rs./kWh)"] || "0"),
+    averageBillingRate: parseFloat(discomData["Average Billing Rate (Rs./kWh)"] || "0"),
+
+    // Additional fallback fields
+    currentRate: parseFloat(discomData["Average Billing Rate (Rs./kWh)"] || "0"),
+    averageRate: parseFloat(averageRate.toFixed(2) || "0"),
+    peakRate: parseFloat(peakRate.toFixed(2) || "0"),
+    offPeakRate: parseFloat(offPeakRate.toFixed(2) || "0"),
+    forecastedRates: [],
+    savingsOpportunities: [],
+    patternAnalysis:
+      "There was an error generating the tariff analysis. Please try again.",
+  };
 }
+
 
 async function generateConsumptionAnalytics(
   energyData: EnergyData[],
