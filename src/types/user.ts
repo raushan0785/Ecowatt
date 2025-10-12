@@ -90,7 +90,9 @@ export interface TariffAnalysis {
   averagePowerPurchaseCost: number;
   averageCostOfSupply: number;
   averageBillingRate: number;
+  currentRate?: number; // ✅ Add this optional field
 }
+
 
 export interface ConsumptionAnalytics {
   peakDemand: number;
