@@ -1,4 +1,35 @@
 // lib/ai.ts
+async function generateSmartDevicesAnalysis(userData: any, touData: any, weatherData: any) {
+  if (!userData?.devices || userData.devices.length === 0) {
+    return { summary: "No smart device data available", recommendations: [] };
+  }
+
+  const devices = userData.devices;
+  const peakHours = touData?.peakHours || [18, 22]; // Default peak hours
+  const recommendations: string[] = [];
+
+  devices.forEach((device: any) => {
+    if (device.avgUsageHour >= peakHours[0] && device.avgUsageHour <= peakHours[1]) {
+      recommendations.push(
+        `${device.name} is used during peak hours — consider scheduling it in off-peak times to save energy.`
+      );
+    } else {
+      recommendations.push(`${device.name} is being used efficiently.`);
+    }
+  });
+
+  const weatherImpact = weatherData
+    ? `Weather data integrated — temperature may affect cooling/heating device efficiency.`
+    : `Weather data not available for device efficiency estimation.`;
+
+  return {
+    summary: "Smart device energy analysis completed successfully.",
+    totalDevices: devices.length,
+    recommendations,
+    weatherImpact,
+  };
+}
+
 async function generateSolarAnalysis(sortedEnergyData: any[], userData: any, weatherData: any) {
   if (!sortedEnergyData || sortedEnergyData.length === 0) {
     return { summary: "No solar energy data available", totalSolarGeneration: 0 };
