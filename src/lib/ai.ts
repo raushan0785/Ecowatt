@@ -8,6 +8,22 @@ async function generateTariffAnalysis(touData: any, discomData: any) {
     discomCount: discomData?.length || 0,
   };
 }
+async function generateConsumptionAnalytics(sortedEnergyData: any[], weatherData: any) {
+  if (!sortedEnergyData || sortedEnergyData.length === 0) {
+    return { summary: "No energy data available", totalConsumption: 0 };
+  }
+
+  const totalConsumption = sortedEnergyData.reduce((sum, entry) => sum + (entry.consumption || 0), 0);
+  const averageDailyConsumption = totalConsumption / sortedEnergyData.length;
+
+  return {
+    summary: "Consumption analytics generated successfully",
+    totalConsumption,
+    averageDailyConsumption,
+    weatherImpact: weatherData ? "Weather data integrated for analysis" : "No weather data available",
+  };
+}
+
 
 import { groupDataByDay } from "@/lib/utils";
 import {
