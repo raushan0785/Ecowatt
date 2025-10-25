@@ -1,4 +1,14 @@
 // lib/ai.ts
+
+async function generateTariffAnalysis(touData: any, discomData: any) {
+  // Example placeholder logic — adjust as needed
+  return {
+    summary: "Tariff analysis generated successfully.",
+    averageTariff: (touData?.reduce((sum: number, t: any) => sum + t.rate, 0) || 0) / (touData?.length || 1),
+    discomCount: discomData?.length || 0,
+  };
+}
+
 import { groupDataByDay } from "@/lib/utils";
 import {
   ConsumptionAnalytics,
