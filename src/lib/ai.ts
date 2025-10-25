@@ -1,4 +1,30 @@
 // lib/ai.ts
+async function generateSolarAnalysis(sortedEnergyData: any[], userData: any, weatherData: any) {
+  if (!sortedEnergyData || sortedEnergyData.length === 0) {
+    return { summary: "No solar energy data available", totalSolarGeneration: 0 };
+  }
+
+  // Example simulation: estimating solar generation based on weather and user solar capacity
+  const userSolarCapacity = userData?.solarCapacity || 5; // default 5 kW
+  const sunnyDays = weatherData?.sunnyDays || 20; // approximate sunny days in a month
+  const totalSolarGeneration = userSolarCapacity * sunnyDays * 4; // kWh generated
+
+  const averageDailyGeneration = totalSolarGeneration / 30;
+
+  // Compare with energy consumption (if available)
+  const totalConsumption = sortedEnergyData.reduce((sum, entry) => sum + (entry.consumption || 0), 0);
+  const solarOffsetPercentage = ((totalSolarGeneration / totalConsumption) * 100).toFixed(2);
+
+  return {
+    summary: "Solar analysis generated successfully",
+    totalSolarGeneration,
+    averageDailyGeneration,
+    solarOffsetPercentage,
+    weatherImpact: weatherData
+      ? "Weather conditions integrated for solar prediction"
+      : "Weather data not available",
+  };
+}
 
 async function generateTariffAnalysis(touData: any, discomData: any) {
   // Example placeholder logic — adjust as needed
