@@ -278,8 +278,8 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <DiscomInfoCard discomInfo={discomInfo} touHistory={touHistory} />
               <TOURateHistoryCard
-                category={userData ? userData.userCategory : ""}
-                touHistory={touHistory}
+              category={userData?.userCategory ?? undefined}
+               providedTOUHistory={touHistory}
               />
             </div>
           )}

@@ -70,34 +70,60 @@ export interface EnergyData {
 }
 
 export interface ExecutiveSummary {
-  monthlyBill: number;
-  primaryGoal: string;
-  energyProfile: {
-    type: string;
-    storageCapacity: number;
-    solarCapacity: number;
-  };
-  discom: string;
+  // Fields for ReportCards
+  currentMonthCost?: number;
+  costComparisonPercentage?: number;
+  costTrend?: "up" | "down";
+  solarGeneration?: number | null;
+  batteryUsage?: number | null;
+  totalEnergySavings?: number;
+  keyRecommendations?: KeyRecommendation[];
+
+  // Fields for PDFDownloadButton / old structure
+  monthlyBill?: number;
+  primaryGoal?: string;
+  energyProfile?: EnergyProfile;
+  discom?: string;
 }
 
 export interface TariffAnalysis {
   averagePowerPurchaseCost: number;
   averageCostOfSupply: number;
   averageBillingRate: number;
+
+  currentRate?: number;
+  averageRate?: number;
+  peakRate?: number;
+  offPeakRate?: number;
+  forecastedRates?: number[];
+
+  // ✅ Add these new fields
+  savingsOpportunities?: any[]; // Adjust type if you know exact structure
+  patternAnalysis?: string;
 }
+
+
+
 
 export interface ConsumptionAnalytics {
   peakDemand: number;
   peakDemandTime: string;
   consumptionPattern: string;
   mainConsumers: string[];
+  totalConsumption?: number; // in kWh
+  averageDailyConsumption?: number; // in kWh
 }
+
 
 export interface SolarAnalysis {
   status: string;
   capacity: number;
   potential: string;
+  dailyGeneration?: number;       // in kWh
+  monthlyGeneration?: number;     // in kWh
+  efficiency?: number;            // in percentage
 }
+
 
 export interface SmartDevicesAnalysis {
   installedDevices: Array<{
@@ -105,7 +131,9 @@ export interface SmartDevicesAnalysis {
     type: string;
   }>;
   missingDevices: string[];
+  totalPotentialSavings?: number; // ✅ Add this line
 }
+
 
 export interface Recommendation {
   title: string;
