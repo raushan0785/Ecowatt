@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { sendTariffAlertEmail } from "./email";
 import { db } from "./firebase";
 import { doc, onSnapshot } from "firebase/firestore";

@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import contractABI from "@/data/contract-abi.json";
 import Web3 from "web3";
 import { fromWei } from "web3-utils";

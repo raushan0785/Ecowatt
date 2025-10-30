@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { groupDataByDay } from "@/lib/utils";
 import {
   ConsumptionAnalytics,

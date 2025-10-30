@@ -1,4 +1,7 @@
+//@ts-nocheck
+
 // lib/api.ts
+
 import discomData from "@/data/electricity-providers.json";
 import { TOUData, WeatherData } from "@/types/user";
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";

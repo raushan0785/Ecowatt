@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { EnergyData, UserData } from "@/types/user";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";

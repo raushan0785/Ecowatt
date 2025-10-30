@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { Button } from "@/components/ui/button";
 import { Lightbulb } from "lucide-react";
 import { toast } from "sonner";

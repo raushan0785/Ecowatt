@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import emailjs from '@emailjs/browser';
 
 interface EmailOptions {

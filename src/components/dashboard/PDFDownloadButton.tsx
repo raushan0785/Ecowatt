@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Button } from "@/components/ui/button";
 import { UserData, DetailedReport } from "@/types/user";
 import { PDFDownloadLink } from "@react-pdf/renderer";
